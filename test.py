@@ -150,14 +150,15 @@ comp = invd[:5]
 # print(fitr)
 
 
-arr = np.zeros((20, 180), dtype=np.int64)
+arr = np.zeros((20, 120), dtype=np.int64)
 
 
 # print(invd)
 sor = [5]
 incr = 0
-check = 66
-ment = 3
+check = [5, 6, 42, 86]
+ment = [3, 3, 4, 2]
+dicti = 4
 while len(sor) != 0:
     i = j = 0
     sor = sorted(fitr)
@@ -171,20 +172,19 @@ while len(sor) != 0:
         break
     tick = 0
     for x in range(len(fitr)):
-        
+
         if fitr[x] != 0:
-                tick += 1       
-        print(tick)
+            tick += 1
         for y in range(sor[0]):
             if fitr[x] != 0:
+                for u in range(dicti):
 
-                if (incr + (y + 1)) == check and tick > ment:
-                    arr[x][incr + y] = 0
-                        
-                else:
-                    arr[x][incr + y] = 1            
+                    if (incr + (y + 1)) == check[u] and tick > ment[u]:
+                        arr[x][incr + y] = 0
+                        break
 
-         
+                    else:
+                        arr[x][incr + y] = 1
 
         if fitr[x] != 0:
             fitr[x] -= sor[0]
@@ -209,25 +209,89 @@ while len(sor) != 0:
 
 arr1 = arr.transpose()
 # print(arr1)
-for _ in range(180):
+for _ in range(120):
     print(_ + 1, arr1[_])
-# print(arr1)
 
-# runner = []
-# random_list = []
-# big = []
+summ = 0
+sub = []
+for _ in range(20):
+    for x in range(120):
+        summ += arr[_][x]
+    sub.append(summ)
+    summ = 0
 
-# for _ in range(5):
-#     bran_len = len(depart[_])
-#     runner.append(list(depart[_]))
-#     bran_inv = math.ceil((no_inv * bran_len)/100)
-#     random_list = []
-#     for x in range(bran_inv):
-#         rand = random.choice(runner[_])
-#         random_list.append(rand)
-#         runner[_].remove(rand)
 
-#     big.append(random_list)
+print(sub)
+sub2 = []
+hh = 0
+for _ in range(20):
+    hh = (sub[_])
+    sub2.append(hh)
+    # sub2[_] -= invd[_]
 
-# for _ in range(5):
-#     print(*big[_], sep='  {} \n'.format(name[_]))
+neww = [x1 - x2 for (x1, x2) in zip(invd, sub2)]
+
+cro = []
+print(neww)
+for _ in range(20):
+    for x in range(neww[_]):
+        cro.append(_)
+print(cro)
+flag = 0
+for _ in range(120):
+    adder = flag = 0
+    for y in range(len(check)):
+        if _ == check[y] - 1:
+            flag = 1
+    if flag != 1:
+
+        for x in range(20):
+            adder += arr1[_][x]
+        print("adder", adder)
+        if adder != 5:
+            z = 0
+            while len(cro) != 0:
+
+                adder = 0
+                print("z index", z)
+                print(cro)
+                print("cro ele", cro[z])
+                print("_", _)
+                if arr1[_][cro[z]] != 1:
+                    arr1[_][cro[z]] = 1
+                    for x in range(20):
+                        adder += arr1[_][x]
+                    cro.remove(cro[z])
+                    print(cro)
+
+                if adder == 5:
+                    break
+                print("len cro", len(cro))
+                if z < len(cro)-1:
+                    z += 1
+                else:
+                    break
+
+for _ in range(120):
+    print(_ + 1, arr1[_])
+
+    # print(arr1)
+
+    # runner = []
+    # random_list = []
+    # big = []
+
+    # for _ in range(5):
+    #     bran_len = len(depart[_])
+    #     runner.append(list(depart[_]))
+    #     bran_inv = math.ceil((no_inv * bran_len)/100)
+    #     random_list = []
+    #     for x in range(bran_inv):
+    #         rand = random.choice(runner[_])
+    #         random_list.append(rand)
+    #         runner[_].remove(rand)
+
+    #     big.append(random_list)
+
+    # for _ in range(5):
+    #     print(*big[_], sep='  {} \n'.format(name[_]))
