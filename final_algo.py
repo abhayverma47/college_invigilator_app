@@ -147,8 +147,11 @@ fitr = invd[:5]
 comp = invd[:5]
 # print(fitr)
 
+days = 20
+teachers = 180
 
-arr = np.zeros((20, 180), dtype=np.int64)
+### creating empty 0 ###
+arr = np.zeros((days, teachers), dtype=np.int64)
 
 
 # print(invd)
@@ -188,14 +191,14 @@ for x in range(len(invd)):
 ### algorithm to fill matrix with invidulator assignment ###
 testr = tests = 0
 x = 0
-for _ in range(20):
+for _ in range(days):
     x = 0
     lenty = 0
     for y in range(5):  # no of branches
         tests = 0
         while True:
             tests = 0
-            for test1 in range(20):
+            for test1 in range(days):
                 tests += arr1[x][test1]
             if tests == 5:
                 x += 1
@@ -205,7 +208,7 @@ for _ in range(20):
             if x == len(depart[y]):
                 break
             testr = 0
-            for test in range(20):
+            for test in range(days):
                 testr += arr1[x][test]
             if testr != 5:
                 arr1[x][_] = 1
@@ -217,7 +220,7 @@ for _ in range(20):
 ### algorithm to assign specific days for requested teachers ###
 for x in range(dicti):
     dd = 0
-    for _ in range(20):
+    for _ in range(days):
         if dd != ment[x]:
             dd += arr1[check[x]-1][_]
         else:
@@ -230,8 +233,8 @@ for x in range(dicti):
 ### algorithm for summation of individual day ###
 summ = 0
 sub = []
-for _ in range(20):
-    for x in range(180):
+for _ in range(days):
+    for x in range(teachers):
         summ += arr[_][x]
     sub.append(summ)
     summ = 0
@@ -239,7 +242,7 @@ for _ in range(20):
 ### algorithm for substracted list ###
 sub2 = []
 hh = 0
-for _ in range(20):
+for _ in range(days):
     hh = (sub[_])
     sub2.append(hh)
 
@@ -251,10 +254,10 @@ flag = 1
 tests = 0
 x = len(comb)
 while flag != 0:
-    for _ in range(20):
+    for _ in range(days):
         testr = 0
         tests = 0
-        for test in range(20):
+        for test in range(days):
             testr += arr1[x][test]
             if neww[test] > 0:
                 tests += 1
@@ -271,7 +274,7 @@ while flag != 0:
     x += 1
 
 
-for _ in range(180):
+for _ in range(teachers):
     print(_ + 1, arr1[_])
 
 
@@ -280,8 +283,8 @@ arr2 = list(arr1.transpose())
 ### algorithm for conversion of numpyarray(matrix) to 2D-list ###
 arr3 = []
 arr4 = []
-for _ in range(20):
-    for x in range(180):
+for _ in range(days):
+    for x in range(teachers):
         arr3.append(arr2[_][x])
     arr4.append(arr3)
     arr3 = []
@@ -319,7 +322,7 @@ for row, data in enumerate(comb):
     worksheet.write(row + 4, col, data, cell_format1)
 row = 4
 for col, data in enumerate(arr4):
-    for _ in range(180):
+    for _ in range(teachers):
         if data[_] == 0:
             # converting individual integer lists to string lists and making 0 = '' ###
             data[_] = str(data[_])
