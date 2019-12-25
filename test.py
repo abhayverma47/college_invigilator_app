@@ -1,3 +1,4 @@
+import xlsxwriter
 import random
 import math
 import numpy as np
@@ -290,15 +291,11 @@ for x in range(len(invd)):
     for _ in range(len(branch_per)):
         varr = (math.ceil((branch_per[_] * invd[x])/100))
         branch_r.append(varr)
-        branch_x.append(len(depart[_]) - varr) 
+        branch_x.append(len(depart[_]) - varr)
     branch_req.append(branch_r)
     branch_zero.append(branch_x)
     branch_r = []
     branch_x = []
-    
-for _ in range(20):
-    for x in range(5):
-        print(branch_req[_][x], branch_zero[_][x], branch_req[_][x] + branch_zero[_][x] )
 
 
 # print(branch_req)
@@ -317,20 +314,20 @@ for _ in range(20):
             if tests == 5:
                 x += 1
             elif tests != 5:
-                break    
+                break
         for z in range(branch_req[_][y]):
             if x == len(depart[y]):
                 break
             testr = 0
             for test in range(20):
                 testr += arr1[x][test]
-            if testr != 5:    
+            if testr != 5:
                 arr1[x][_] = 1
             x += 1
         lenty += len(depart[y])
         change = lenty - x
-        x += change    
-              
+        x += change
+
 for x in range(dicti):
     dd = 0
     for _ in range(20):
@@ -340,9 +337,8 @@ for x in range(dicti):
             arr1[check[x]-1][_] = 0
 
 
-
-for _ in range(180):
-    print(_ + 1, arr1[_])
+# for _ in range(180):
+#     print(_ + 1, arr1[_])
 
 
 summ = 0
@@ -354,7 +350,6 @@ for _ in range(20):
     summ = 0
 
 
-print(sub)
 sub2 = []
 hh = 0
 for _ in range(20):
@@ -364,7 +359,33 @@ for _ in range(20):
 neww = [x1 - x2 for (x1, x2) in zip(invd, sub2)]
 
 
-print(neww)
+flag = 1
+tests = 0
+x = len(comb)
+while flag != 0:
+    for _ in range(20):
+        testr = 0
+        tests = 0
+        for test in range(20):
+            testr += arr1[x][test]
+            if neww[test] > 0:
+                tests += 1
+        if tests == 0:
+            flag = 0
+        if testr != 5:
+            if arr1[x][_] != 1:
+                if neww[_] > 0:
+                    arr1[x][_] = 1
+                    neww[_] -= 1
+        else:
+            break
+
+    x += 1
+
+
+for _ in range(180):
+    print(_ + 1, arr1[_])
+
 
 # runner = []
 # random_list = []
@@ -384,3 +405,34 @@ print(neww)
 
 # for _ in range(5):
 #     print(*big[_], sep='  {} \n'.format(name[_]))
+
+arr2 = list(arr1.transpose())
+arr3 = []
+arr4 = []
+for _ in range(20):
+    for x in range(180):
+        arr3.append(arr2[_][x])
+    arr4.append(arr3)
+    arr3 = []
+arr5 = []
+
+workbook = xlsxwriter.Workbook('arrays.xlsx')
+worksheet = workbook.add_worksheet()
+
+for _ in range(80):
+    comb.append("extra")
+
+
+col = 0
+
+for row, data in enumerate(comb):
+    worksheet.write_column(row + 1, col, data)
+row = 1
+for col, data in enumerate(arr4):
+    for _ in range(180):
+        if data[_] == 0:
+            data[_] = str(data[_])
+            data[_] = ''
+    worksheet.write_column(row, col+1, data)
+
+workbook.close()
