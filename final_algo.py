@@ -139,6 +139,7 @@ for _ in range(len(depart)):
 
 # print(*comb, sep=("\n"))
 
+### invd is total invidulations ###
 invd = [34, 39, 13, 38, 8, 30, 31, 17, 37, 32, 26,
         25, 29, 23, 34, 22, 32, 25, 17, 14]
 
@@ -153,10 +154,12 @@ arr = np.zeros((20, 180), dtype=np.int64)
 # print(invd)
 sor = [5]
 incr = 0
-check = [5, 6, 42, 86]
-ment = [3, 3, 4, 2]
-dicti = 4
+check = [5, 6, 42, 86]  # teachers who want specified days
+ment = [3, 3, 4, 2]  # above teachers specified days
+dicti = 4  # no of teachers
 
+
+### individual branch percentage ###
 arr1 = arr.transpose()
 branch_per = []
 for _ in range(len(depart)):
@@ -168,6 +171,7 @@ branch_x = []
 branch_req = []
 branch_zero = []
 
+### everydays separate no of invidulators required ###
 for x in range(len(invd)):
     for _ in range(len(branch_per)):
         varr = (math.ceil((branch_per[_] * invd[x])/100))
@@ -181,6 +185,7 @@ for x in range(len(invd)):
 
 # print(branch_req)
 
+### algorithm to fill matrix with invidulator assignment ###
 testr = tests = 0
 x = 0
 for _ in range(20):
@@ -209,6 +214,7 @@ for _ in range(20):
         change = lenty - x
         x += change
 
+### algorithm to assign specific days for requested teachers ###
 for x in range(dicti):
     dd = 0
     for _ in range(20):
@@ -221,7 +227,7 @@ for x in range(dicti):
 # for _ in range(180):
 #     print(_ + 1, arr1[_])
 
-
+### algorithm for summation of individual day ###
 summ = 0
 sub = []
 for _ in range(20):
@@ -230,7 +236,7 @@ for _ in range(20):
     sub.append(summ)
     summ = 0
 
-
+### algorithm for substracted list ###
 sub2 = []
 hh = 0
 for _ in range(20):
@@ -240,6 +246,7 @@ for _ in range(20):
 neww = [x1 - x2 for (x1, x2) in zip(invd, sub2)]
 
 
+### algorithm for extra teachers assignment ###
 flag = 1
 tests = 0
 x = len(comb)
@@ -269,6 +276,8 @@ for _ in range(180):
 
 
 arr2 = list(arr1.transpose())
+
+### algorithm for conversion of numpyarray(matrix) to 2D-list ###
 arr3 = []
 arr4 = []
 for _ in range(20):
@@ -278,6 +287,7 @@ for _ in range(20):
     arr3 = []
 arr5 = []
 
+### writing matrix to the excel file ###
 workbook = xlsxwriter.Workbook('Simran.xlsx')
 worksheet = workbook.add_worksheet()
 
@@ -311,6 +321,7 @@ row = 4
 for col, data in enumerate(arr4):
     for _ in range(180):
         if data[_] == 0:
+            # converting individual integer lists to string lists and making 0 = '' ###
             data[_] = str(data[_])
             data[_] = ''
     worksheet.write_column(row, col+1, data, cell_format)
