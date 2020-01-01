@@ -4,16 +4,21 @@ import math
 import numpy as np
 np.set_printoptions(threshold=np.inf)
 
+invd = []
+noOfExams = int(input("Enter no of exams: "))
+for _ in range(noOfExams):
 
-# no_stu = int(input("Enter no of students: "))
-# no_stu_cl = int(input("Enter no of students in one class: "))
-# ext_ratio = int(input("Ratio for extra invidulators 1:"))
+    no_stu = int(input("Enter no of students: "))
+    no_stu_cl = int(input("Enter no of students in one class: "))
+    ext_ratio = int(input("Ratio for extra invidulators 1:"))
 
-# no_blocks = math.ceil(no_stu/no_stu_cl)
-# no_reliever = math.ceil(no_blocks/5)
-# no_extras = math.ceil(no_blocks/ext_ratio)
+    no_blocks = math.ceil(no_stu/no_stu_cl)
+    no_reliever = math.ceil(no_blocks/5)
+    no_extras = math.ceil(no_blocks/ext_ratio)
 
-# no_inv = no_blocks + no_reliever + no_extras
+    no_inv = no_blocks + no_reliever + no_extras
+    invd.append(no_inv)
+
 # print(no_inv)
 
 
@@ -139,23 +144,46 @@ for _ in range(len(depart)):
 
 # print(*comb, sep=("\n"))
 
+new_list = []
+for index, val in enumerate(comb):
+    new_list.append(val)
+    new_list.append(index + 1)
+
+
+comb_dict = {new_list[i]: new_list[i + 1] for i in range(0, len(new_list), 2)}
 ### invd is total invidulations ###
-invd = [34, 39, 13, 38, 8, 30, 31, 17, 37, 32, 26,
-        25, 29, 23, 34, 22, 32, 25, 17, 14]
+# invd = [34, 39, 13, 38, 8, 30, 31, 17, 37, 32, 26,
+#         25, 29, 23, 34, 22, 32, 25, 17, 14]
 
 
-days = 20
+days = noOfExams
+# days = 20
 teachers = 180
 
 ### creating empty matrix ###
 arr = np.zeros((days, teachers), dtype=np.int64)
 
 
-check = [5, 6, 42, 86]  # teachers who want specified days
-ment = [3, 3, 4, 2]  # above teachers specified days
-dicti = 4  # no of teachers
+indexCustomTeacher = []  # teachers who want specified days
+customTeacherDays = []  # above teachers specified days
 
+dayz = 0
+custom = input(
+    "If any teachers require custom invidulations press y/Y : ").lower()
+if custom == 'y':
+    dayz = int(input("How many teachers: "))
+    for _ in range(dayz):
+        work_days, * \
+            teacherName = input(
+                f"Enter {_ + 1} teacher's working days and their name: ").split()
+        indexCustomTeacher.append(
+            comb_dict[f"{teacherName[0]} {teacherName[1]}".title()])
+        customTeacherDays.append(int(work_days))
 
+if dayz:
+    noCustomTeachers = dayz
+else:
+    noCustomTeachers = 0
 ### individual branch percentage ###
 arr1 = arr.transpose()
 branch_per = []
@@ -178,6 +206,7 @@ for x in range(len(invd)):
     branch_zero.append(branch_x)
     branch_r = []
     branch_x = []
+print(branch_req)
 
 ### algorithm to fill matrix with invidulator assignment ###
 testr = tests = 0
@@ -209,13 +238,13 @@ for _ in range(days):
         x += change
 
 ### algorithm to assign specific days for requested teachers ###
-for x in range(dicti):
+for x in range(noCustomTeachers):
     dd = 0
     for _ in range(days):
-        if dd != ment[x]:
-            dd += arr1[check[x]-1][_]
+        if dd != customTeacherDays[x]:
+            dd += arr1[indexCustomTeacher[x]-1][_]
         else:
-            arr1[check[x]-1][_] = 0
+            arr1[indexCustomTeacher[x]-1][_] = 0
 
 
 ### algorithm for summation of individual day ###
@@ -297,8 +326,8 @@ cell_format1 = workbook.add_format(
 cell_format = workbook.add_format(
 )
 cell_format.set_pattern(1)  # This is optional when using a solid fill.
-# cell_format.set_bg_color('green')
-cell_format.set_fg_color("green")
+cell_format.set_bg_color('white')
+# cell_format.set_fg_color("green")
 cell_format.set_border(1)
 
 row = 2
