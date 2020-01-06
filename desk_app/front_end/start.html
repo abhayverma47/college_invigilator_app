@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="home.css" type="text/css">
+    <link rel="stylesheet" href="start.css" type="text/css">
+
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Invidulator Assigner</title>
+    <script type="text/javascript" src="/eel.js"></script>
+
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="section">
+                <div class="col s12 mar1">
+                    <a class="waves-effect waves-light btn grey darken-3 right " href="home.html">
+                        Home</a>
+                </div>
+
+                <div class="col s12">
+                    <div class="input-field col s3">
+                        <input placeholder="No of SPB" id="no_SPB" type="text" class="validate">
+                    </div>
+                    <div class="input-field col s3">
+                        <input placeholder="Ratio 1:" id="Ratio" type="text" class="validate">
+                    </div>
+                </div>
+                <div class="col s12 mar">
+                    <div class="input-field col s6">
+                        <input placeholder="No of students" id="no_students" type="text" class="validate">
+                    </div>
+                    <div>
+                        <a class="waves-effect waves-light btn grey Submit center purple accent-1"
+                            id="selector">Enter</a>
+                    </div>
+                </div>
+                <div class="col s12">
+                    <div class="input-field col s6">
+                        <input placeholder="Teachers days and thier name" id="days_name" type="text" class="validate">
+                    </div>
+                    <div>
+                        <a class="waves-effect waves-light btn grey Submit center purple accent-1"
+                            id="selector1">Enter</a>
+                    </div>
+                </div>
+                <div class="col s12 mar2">
+                    <div>
+                        <a class="waves-effect waves-light btn purple accent-4 Submit" id="submit"
+                            onclick="generate()">submit</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="start.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>
